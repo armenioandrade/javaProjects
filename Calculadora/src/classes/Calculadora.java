@@ -23,12 +23,8 @@ public class Calculadora extends javax.swing.JFrame implements Document {
     /**
      * Creates new form Calculadora
      */
-    Soma soma = new Soma();
-    Subracao sub = new Subracao();
-    Multiplicacao mult = new Multiplicacao();
-    Divisao div = new Divisao();
     Operacao operacao = new Operacao();
-    
+
     public Calculadora() {
         initComponents();
     }
@@ -53,12 +49,12 @@ public class Calculadora extends javax.swing.JFrame implements Document {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        botaoSoma = new javax.swing.JButton();
+        botaoSubtracao = new javax.swing.JButton();
+        botaoMultiplicacao = new javax.swing.JButton();
+        botaoDivisao = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
+        botaoResultado = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
 
         jButton16.setText("jButton16");
@@ -74,14 +70,6 @@ public class Calculadora extends javax.swing.JFrame implements Document {
         });
 
         jButton1.setText("1");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
-            }
-        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -149,28 +137,33 @@ public class Calculadora extends javax.swing.JFrame implements Document {
             }
         });
 
-        jButton10.setText("+");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        botaoSoma.setText("+");
+        botaoSoma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                botaoSomaActionPerformed(evt);
             }
         });
 
-        jButton11.setText("-");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        botaoSubtracao.setText("-");
+        botaoSubtracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                botaoSubtracaoActionPerformed(evt);
             }
         });
 
-        jButton12.setText("*");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        botaoMultiplicacao.setText("*");
+        botaoMultiplicacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                botaoMultiplicacaoActionPerformed(evt);
             }
         });
 
-        jButton13.setText("/");
+        botaoDivisao.setText("/");
+        botaoDivisao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDivisaoActionPerformed(evt);
+            }
+        });
 
         jButton14.setText("0");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
@@ -179,10 +172,10 @@ public class Calculadora extends javax.swing.JFrame implements Document {
             }
         });
 
-        jButton15.setText("=");
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        botaoResultado.setText("=");
+        botaoResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                botaoResultadoActionPerformed(evt);
             }
         });
 
@@ -207,16 +200,16 @@ public class Calculadora extends javax.swing.JFrame implements Document {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botaoSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(botaoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(botaoSubtracao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(botaoMultiplicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(botaoDivisao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -269,12 +262,12 @@ public class Calculadora extends javax.swing.JFrame implements Document {
                 .addComponent(jButton14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
+                    .addComponent(botaoSoma)
+                    .addComponent(botaoSubtracao)
+                    .addComponent(botaoMultiplicacao)
+                    .addComponent(botaoDivisao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton15)
+                .addComponent(botaoResultado)
                 .addGap(15, 15, 15))
         );
 
@@ -287,23 +280,26 @@ public class Calculadora extends javax.swing.JFrame implements Document {
 
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // METODO DA SOMA
-        soma.setValor1(Double.parseDouble(jTextField1.getText()));
+    private void botaoSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSomaActionPerformed
+        // METODO DA SOMA 
+        operacao.setValor1(Double.parseDouble(jTextField1.getText()));
+        operacao.setOperacao("soma");
         jTextField1.setText(null);
-        soma.setValor2(Double.parseDouble(jTextField1.getText()));
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_botaoSomaActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void botaoSubtracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSubtracaoActionPerformed
         // METODO DA SUBTRACAO
-        sub.setValor1(Double.parseDouble(jTextField1.getText()));
+        operacao.setValor1(Double.parseDouble(jTextField1.getText()));
+        operacao.setOperacao("sub");
         jTextField1.setText(null);
-        sub.setValor2(Double.parseDouble(jTextField1.getText()));
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_botaoSubtracaoActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton12ActionPerformed
+    private void botaoMultiplicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMultiplicacaoActionPerformed
+        // METODO MULTIPLICACAO
+        operacao.setValor1(Double.parseDouble(jTextField1.getText()));
+        operacao.setOperacao("multi");
+        jTextField1.setText(null);
+    }//GEN-LAST:event_botaoMultiplicacaoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -311,9 +307,9 @@ public class Calculadora extends javax.swing.JFrame implements Document {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //BOTA NUMERO 1
+        //BOTAO NUMERO 1
         jTextField1.replaceSelection(jButton1.getText());
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -328,52 +324,59 @@ public class Calculadora extends javax.swing.JFrame implements Document {
         jTextField1.replaceSelection(jButton5.getText());    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         jTextField1.replaceSelection(jButton6.getText());
+        jTextField1.replaceSelection(jButton6.getText());
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-         jTextField1.replaceSelection(jButton7.getText());
+        jTextField1.replaceSelection(jButton7.getText());
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-         jTextField1.replaceSelection(jButton8.getText());
+        jTextField1.replaceSelection(jButton8.getText());
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-         jTextField1.replaceSelection(jButton9.getText());
+        jTextField1.replaceSelection(jButton9.getText());
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         jTextField1.replaceSelection(jButton14.getText());
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-
-    }//GEN-LAST:event_jButton1MousePressed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        soma.efetuarSoma(soma.getValor1(), soma.getValor2());
-        jTextField1.setText(soma.getResultado().toString());
-        sub.efetuarSubtracao(sub.getValor1(), sub.getValor2());
-        jTextField1.setText(sub.getResultado().toString());
-    }//GEN-LAST:event_jButton15ActionPerformed
-
+    private void botaoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoResultadoActionPerformed
+        //BOTAO IGUAL
+        if (operacao.getOperacao().equalsIgnoreCase("soma")) {
+            operacao.setValor2(Double.parseDouble(jTextField1.getText()));
+            jTextField1.setText(operacao.getResultadoSoma().toString());
+        } else if (operacao.getOperacao().equalsIgnoreCase("sub")) {
+            operacao.setValor2(Double.parseDouble(jTextField1.getText()));
+            jTextField1.setText(operacao.getResultadoSub().toString());
+        } else if (operacao.getOperacao().equalsIgnoreCase("multi")) {
+            operacao.setValor2(Double.parseDouble(jTextField1.getText()));
+            jTextField1.setText(operacao.getResultadoMulti().toString());
+        }else if(operacao.getOperacao().equalsIgnoreCase("div")){
+            operacao.setValor2(Double.parseDouble(jTextField1.getText()));
+            jTextField1.setText(operacao.getResultadoDiv().toString());
+                    
+        
+    }//GEN-LAST:event_botaoResultadoActionPerformed
+    }
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        soma.setValor2(Double.parseDouble(jTextField1.getText()));
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         //BOTAO DE LIMPAR
         jTextField1.setText(null);
-        soma.setValor1(0.0);
-        soma.setValor2(0.0);
+
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void botaoDivisaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDivisaoActionPerformed
+        // TODO add your handling code here:
+        operacao.setValor1(Double.parseDouble(jTextField1.getText()));
+        operacao.setOperacao("div");
+        jTextField1.setText(null);
+    }//GEN-LAST:event_botaoDivisaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,13 +416,13 @@ public class Calculadora extends javax.swing.JFrame implements Document {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoDivisao;
+    private javax.swing.JButton botaoMultiplicacao;
+    private javax.swing.JButton botaoResultado;
+    private javax.swing.JButton botaoSoma;
+    private javax.swing.JButton botaoSubtracao;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
