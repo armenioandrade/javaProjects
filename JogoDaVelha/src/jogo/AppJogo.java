@@ -11,6 +11,7 @@ package jogo;
 public class AppJogo extends javax.swing.JFrame {
 
     private boolean vitoria = false;
+    
 
     /**
      * Creates new form AppJogo
@@ -284,6 +285,8 @@ public class AppJogo extends javax.swing.JFrame {
         }
         return vitoria;
     }
+    
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
