@@ -1,12 +1,16 @@
 package exerciciosedabit;
+
+import java.util.Scanner;
+
 public class Main {
-    
+
     public static void main(String[] args) {
-    EmailCheck ec = new EmailCheck();
-    
-    System.out.println(ec.emailValidation("armenio@gmail.com"));
-  
-        
+        Scanner scan = new Scanner(System.in);
+        ValidatePIN vp = new ValidatePIN();
+        System.out.println(vp.PINValidation(""));
+        System.out.println(vp.PINValidation("3990"));
+        vp.printPINArray("3999");
+
     }
-    
+
 }
