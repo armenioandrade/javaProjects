@@ -9,7 +9,7 @@ public class Main {
         ValidatePIN vp = new ValidatePIN();
         System.out.println(vp.PINValidation(""));
         System.out.println(vp.PINValidation("3990"));
-        vp.printPINArray("3999");
+        
 
     }
 
