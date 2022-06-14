@@ -2,69 +2,59 @@ package exerciciosaleatorios;
 
 public class JogoDaForcaClass {
 
-    char[] arrayLetra;
-    char[] arrayPalavra;
-    char[] resultadoPalavra;
-    int tamanhoDaPalavra;
-    int qtdeMembros = 6;
-    String palavra;
-    String letra;
+    private String palavraParaAdivinhar;
+    private String letraSelecionada;
+    private char[] palavraDaForca;
 
-    public void procuraLetraNaPalavra(String letra, String palavra) {
-        this.arrayLetra = letra.toCharArray();
-        this.arrayPalavra = palavra.toCharArray();
-        for (int i = 0; i < palavra.length(); i++) {
-            if (arrayLetra[0] == arrayPalavra[i]) {
-                this.resultadoPalavra[i] = arrayLetra[0];
+    public char[] getPalavraDaForca() {
+        return palavraDaForca;
+    }
+
+    public void setPalavraDaForca(char[] palavraDaForca) {
+        this.palavraDaForca = palavraDaForca;
+    }
+
+    
+    public String getPalavraParaAdivinhar() {
+        return palavraParaAdivinhar;
+    }
+
+    public void setPalavraParaAdivinhar(String palavraParaAdivinhar) {
+        this.palavraParaAdivinhar = palavraParaAdivinhar;
+        palavraDaForca = new char[this.palavraParaAdivinhar.length()];
+        for (int i = 0; i < palavraDaForca.length; i++) {
+            palavraDaForca[i] = '-';
+            
+        }
+    }
+
+    public String getLetraSelecionada() {
+        return letraSelecionada;
+    }
+
+    public void setLetraSelecionada(String letraSelecionada) {
+        this.letraSelecionada = letraSelecionada;
+    }
+
+    public void procuraLetraNaPalavra(char letra) {
+        char arrayAux[] = palavraParaAdivinhar.toCharArray();
+        for (int i = 0; i < arrayAux.length; i++) {
+            if (arrayAux[i] == letra) {
+                System.out.println("contem a letra " + letra + " na posicao " + i);
+                System.out.println("Preenchendo Forca");
+                adicionaLetraNaPalavra(letra, i);
             }
 
         }
-    }
-    
-    public void imprimirPalavra() {
-        System.out.println("A PALAVRA É");
-        String palavra = String.valueOf(resultadoPalavra);
-        System.out.println(palavra);
-    }
-    
-    public boolean checarPalavra(int tentativa){
-        if(tentativa < this.tamanhoDaPalavra){
-            
-            return true;
-        }
-        return false;
-    }
-    
-    public void quadroNovo(){
-        this.resultadoPalavra = new char[palavra.length()];
-        for (int i = 0; i < resultadoPalavra.length; i++) {
-           resultadoPalavra[i] = '_';
-        }
-        for (int i = 0; i < resultadoPalavra.length; i++) {
-            System.out.print(resultadoPalavra[i]+" ");
-            
-        }
-        System.out.println("");
-    }
-    
-    public void quadroAtual(){
-        System.out.println(String.valueOf(arrayPalavra));
-    }
-    
-    public int getTamanhoDaPalavra() {
-        return this.palavra.length();
+
     }
 
-    public String getPalavra() {
-        return palavra;
-    }
-
-    public void setPalavra(String palavra) {
-        this.palavra = palavra;
-        this.arrayPalavra = palavra.toCharArray();
-                
+    public void adicionaLetraNaPalavra(char letra, int posicao) {
+        palavraDaForca[posicao] = letra;
     }
     
-
+    public void imprimePalavraDaForca(){
+        System.out.print(palavraDaForca);
+    }
     
 }

@@ -9,17 +9,12 @@ public class JogoDaForca {
         Scanner scan = new Scanner(System.in);
 
         JogoDaForcaClass jogo = new JogoDaForcaClass();
-
-        System.out.println("Entre com a palavra");
-        String entrada = scan.nextLine();
-        jogo.setPalavra(entrada);
         
-        jogo.quadroNovo();
-       // jogo.quadroAtual();
-        
-        jogo.procuraLetraNaPalavra("a", entrada);
-        jogo.procuraLetraNaPalavra("b", entrada);
-        jogo.imprimirPalavra();
-
+        jogo.setPalavraParaAdivinhar("armenio");
+        jogo.procuraLetraNaPalavra('o');
+        jogo.procuraLetraNaPalavra('a');
+        jogo.procuraLetraNaPalavra('r');
+        System.out.println(jogo.getPalavraDaForca());
+   
     }
 }
