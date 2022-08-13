@@ -9,12 +9,15 @@ public class JogoDaForca {
         Scanner scan = new Scanner(System.in);
 
         JogoDaForcaClass jogo = new JogoDaForcaClass();
+        System.out.println("Digite a palavra da Forca");
+        jogo.setPalavraParaAdivinhar(scan.nextLine());
+        while(jogo.statusDoJogo() == false){
+        System.out.println("Digite a letra a ser procurada");
+        jogo.procuraLetraNaPalavra(scan.next().charAt(0));
+        jogo.imprimePalavraDaForca();
+        jogo.statusDoJogo();
+        }
         
-        jogo.setPalavraParaAdivinhar("armenio");
-        jogo.procuraLetraNaPalavra('o');
-        jogo.procuraLetraNaPalavra('a');
-        jogo.procuraLetraNaPalavra('r');
-        System.out.println(jogo.getPalavraDaForca());
-   
+        
     }
 }

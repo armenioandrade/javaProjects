@@ -3,7 +3,6 @@ package exerciciosaleatorios;
 public class JogoDaForcaClass {
 
     private String palavraParaAdivinhar;
-    private String letraSelecionada;
     private char[] palavraDaForca;
 
     public char[] getPalavraDaForca() {
@@ -14,7 +13,6 @@ public class JogoDaForcaClass {
         this.palavraDaForca = palavraDaForca;
     }
 
-    
     public String getPalavraParaAdivinhar() {
         return palavraParaAdivinhar;
     }
@@ -24,16 +22,8 @@ public class JogoDaForcaClass {
         palavraDaForca = new char[this.palavraParaAdivinhar.length()];
         for (int i = 0; i < palavraDaForca.length; i++) {
             palavraDaForca[i] = '-';
-            
+
         }
-    }
-
-    public String getLetraSelecionada() {
-        return letraSelecionada;
-    }
-
-    public void setLetraSelecionada(String letraSelecionada) {
-        this.letraSelecionada = letraSelecionada;
     }
 
     public void procuraLetraNaPalavra(char letra) {
@@ -49,12 +39,24 @@ public class JogoDaForcaClass {
 
     }
 
+    public boolean statusDoJogo() {
+        if (String.valueOf(palavraDaForca).equalsIgnoreCase(palavraParaAdivinhar)) {
+            System.out.println("Jogo acabou");
+            System.out.println("Palavra da Forca: " + getPalavraParaAdivinhar());
+            return true;
+        } else {
+            getPalavraParaAdivinhar();
+            return false;
+        }
+
+    }
+
     public void adicionaLetraNaPalavra(char letra, int posicao) {
         palavraDaForca[posicao] = letra;
     }
-    
-    public void imprimePalavraDaForca(){
-        System.out.print(palavraDaForca);
+
+    public void imprimePalavraDaForca() {
+        System.out.println(palavraDaForca);
     }
-    
+
 }

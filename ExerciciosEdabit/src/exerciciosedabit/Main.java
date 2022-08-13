@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         ValidatePIN vp = new ValidatePIN();
-        System.out.println(vp.PINValidation(""));
-        System.out.println(vp.PINValidation("3990"));
+        System.out.println("Digite um PIN para validação: ");
+        vp.PINValidation(scan.nextLine());
         
 
     }

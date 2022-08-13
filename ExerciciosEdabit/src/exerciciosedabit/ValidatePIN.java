@@ -36,22 +36,14 @@ public class ValidatePIN {
         this.pin = pin;
     }
 
-    public boolean PINValidation(String pin) {
-        String[] arrayPin = pin.split(pin);
-        boolean validador = false;
-        for (int i = 0; i < arrayPin.length; i++) {
-            if(arrayPin[i].contains(" ")){
-                validador = false;
-            }else if(arrayPin[i].matches("[a-z][A-Z]")){
-                validador = false;
-            }else if(arrayPin[i].isEmpty()){
-                validador = false;
-            }else{
-                validador = true;
-            }
+    public void PINValidation(String pin) {
+        //check contem numero
+        if (pin.matches("[0-9]{4}") || pin.matches("[0-9]{6}")) {
+            System.out.println("PIN Válido");
+        } else {
+            System.out.println("PIN Inválido");
         }
-     return validador;
+
     }
-  
 
 }
