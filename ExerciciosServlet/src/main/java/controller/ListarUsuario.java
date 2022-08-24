@@ -50,6 +50,22 @@ public class ListarUsuario extends HttpServlet {
         pw.write("</tr> ");
         pw.write("</table> ");
         
+        //Fazendo com Steam e Lambda
+        pw.write("<h1>Usando Lambda e Stream</h1>");
+        pw.write("<br>");
+        pw.write("<table border='1'>");
+        pw.write("<tr>");
+        pw.write("<th>Nome</th>");
+        pw.write("<th>CPF</th>");
+        pw.write("<th>Email</th>");
+        pw.write("<th>Telefone</th>");
+        pw.write("</tr>");
+        pw.write("Total de Usuários cadastrados: "+pd.listarPessoas().size());
+        pw.write("<br>");
+        
+        pd.listarPessoas().stream().forEach(p -> pw.write("<tr>"+"<td>"+p.getNome()+"<td>"+p.getCpf()+"<td>"+p.getEmail()+"<td>"+p.getTelefone()));
+        
+        
 
     }
 }
