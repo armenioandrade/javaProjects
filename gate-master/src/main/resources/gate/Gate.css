@@ -1,0 +1,283 @@
+@import './skin.css';
+@import './link.css';
+@import './button.css';
+@import './treeview.css';
+@import './g-path.css';
+@import './g-tabbar.css';
+@import './g-scroll-tabbar.css';
+@import './g-dialog-commands.css';
+@import './g-desk-pane.css';
+@import './g-icon-pane.css';
+
+@import './icon.css';
+@import './emoji.css';
+@import './fieldset.css';
+@import './div.css';
+@import './nav.css';
+@import './layout.css';
+@import './minibar.css';
+@import './figure.css';
+@import './hmenu.css';
+
+@import "./sort.css";
+@import "./filter.css";
+
+@import './table.css';
+
+@import './visibility.css';
+
+body {
+	visibility: hidden;
+}
+
+iframe {
+	border: none;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	background-image: none
+}
+
+.G {
+	color: var(--g)
+}
+.R {
+	color: var(--r)
+}
+.Y {
+	color: var(--y)
+}
+.B {
+	color: var(--b)
+}
+
+
+form {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+* {
+	font-size: 12px;
+	box-shadow: none;
+	box-sizing: border-box;
+	font-family: Arial, Tahoma, Geneva, sans-serif;
+}
+
+body.Panel {
+	background-color: var(--main);
+	background-image: none;
+}
+body.Page {
+	background-color: var(--main-shaded05);
+	background-image: none;
+}
+
+p  {
+	text-align: justify
+}
+p:first-of-type {
+	text-indent: 40px
+}
+h5 {
+	font-size: 14px;
+	text-align: center
+}
+h4 {
+	font-size: 16px;
+	text-align: center
+}
+h3 {
+	font-size: 18px;
+	text-align: center
+}
+h2 {
+	font-size: 20px;
+	text-align: center
+}
+h1 {
+	font-size: 22px;
+	text-align: center
+}
+
+img {
+	border-style: none;
+	position: relative;
+	vertical-align: middle;
+	margin-left: 2px;
+	margin-right: 2px
+}
+
+ul.LIST {
+	width: 100%;
+	list-style-type: none;
+	margin: auto;
+	padding: 0px;
+	display: inline-block
+}
+ul.LIST > li {
+	float: left;
+	width: 10%;
+	height: 32px;
+	background-color: white;
+	padding: 3px;
+	margin: 0.5%;
+	font-size: 24px;
+	border-radius: 5px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between
+}
+ul.LIST > li > i {
+	font-size: 24px
+}
+ul.LIST > li:focus {
+	background-color: #FFFACD;
+	font-weight: bold;
+	color: var(--g)
+}
+
+input[type='file'] {
+	cursor: pointer
+}
+input:invalid, select:invalid, textarea:invalid {
+	box-shadow: inset 0 0 1px 1px rgba(255, 0, 0, 0.75);
+}
+
+textarea {
+	resize: none;
+	padding: 4px;
+	margin: 0px
+}
+
+label[data-icon], span[data-icon]
+{
+	margin: 4px;
+	height: 32px;
+	cursor: inherit;
+	font-size: 16px;
+	overflow: hidden;
+	text-align: left;
+	border-radius: 5px;
+	display: inline-flex;
+	align-items: center;
+	width: calc(100% - 8px);
+	background-color: #8899AA;
+}
+
+fieldset > label > span > label[data-icon]
+{
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+
+label[data-icon]::before, span[data-icon]::before
+{
+	width: 32px;
+	height: 100%;
+	color: inherit;
+	margin-right: 8px;
+	font-family: gate;
+	font-size: inherit;
+	align-items: center;
+	display: inline-flex;
+	justify-content: center;
+	content: attr(data-icon);
+	border-right: 1px solid #DDDDDD;
+}
+
+i[data-text], a[data-text]
+{
+	display: flex;
+	font-family: gate;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+i[data-text]::after, a[data-text]::after
+{
+	display: block;
+	font-size: 40%;
+	font-family: gate;
+	text-align: center;
+	content: attr(data-text);
+}
+
+li[data-icon]::before
+{
+	float: left;
+	display: flex;
+	color: inherit;
+	margin-right: 8px;
+	font-family: gate;
+	align-items: center;
+	font-weight: inherit;
+	justify-content: center;
+	content: attr(data-icon);
+}
+
+li[data-text]::after
+{
+	float: right;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	content: attr(data-text);
+}
+
+tr[data-canceled='true'] > td {
+	color: #CCCCCC
+}
+
+datalist {
+	display: none;
+}
+
+body[data-scroll-disabled] * {
+	overflow: hidden
+}
+
+big {
+	font-size: 1.2em
+}
+small {
+	font-size: 0.8em
+}
+
+*[disabled],
+*[data-disabled] {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='file'],
+textarea,
+select {
+	width: 100%;
+	background-color: white;
+	border: 1px solid #CCCCCC;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='file']:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+	background-color: var(--hovered);
+}
+
+input[type='text']:hover,
+input[type='password']:hover,
+input[type='file']:hover,
+textarea:hover,
+select:focus {
+	outline: none;
+	border-color: var(--hovered);
+}

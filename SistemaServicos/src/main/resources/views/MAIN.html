@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8">
+		<title>${app.id} - ${app.name}</title>
+
+		<link rel='stylesheet' type='text/css' href='gate/style/Gate.css?version=${version}'/>
+		<script type='module' src='gate/script/Gate.mjs?version=${version}' charset="utf-8"></script>
+
+		<script src='webcomponents-sd-ce.js' charset="utf-8"></script>
+		<link rel='stylesheet' type='text/css' href='LinQ.css?version=${version}'/>
+		<script type='module' src='LinQ.js?version=${version}' charset="utf-8"></script>
+
+		<link rel="shortcut icon" href="FavIcon.png" />
+
+		<script>
+			setInterval(() => fetch("Gate?MODULE=linq.modulos&ACTION=Ping"), 10 * 60 * 1000);
+		</script>
+	</head>
+
+	<g:insert/>
+</html>

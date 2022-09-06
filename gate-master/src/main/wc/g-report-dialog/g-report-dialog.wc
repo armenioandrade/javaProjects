@@ -1,0 +1,16 @@
+<template>
+	<main>
+		<g-window-header>
+			Selecione um tipo de relatório
+			<a id='close' href="#">
+				&#X1011;
+			</a>
+		</g-window-header>
+		<g-window-footer>
+			<g-report-selector>
+			</g-report-selector>
+			<g-download-status>
+			</g-download-status>
+		</g-window-footer>
+	</main>
+</template>

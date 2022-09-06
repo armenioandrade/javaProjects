@@ -23,6 +23,7 @@
         <h1>Agenda de contatos</h1>
         <a link href="novo.html" class="botao1">Novo contato</a>
         <a link href="report" class="botao2">Relatório</a>
+        <a link href="combobox" class="botao1">Teste Combobox</a>
         <table id="tabela">
             <thead>
                 <tr>

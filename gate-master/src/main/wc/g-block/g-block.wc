@@ -1,0 +1,16 @@
+<template>
+	<main>
+		<g-window-header>
+		</g-window-header>
+		<g-window-section>
+			<div>
+				<span>
+				</span>
+			</div>
+		</g-window-section>
+		<footer>
+			<g-digital-clock>
+			</g-digital-clock>
+		</footer>
+	</main>
+</template>

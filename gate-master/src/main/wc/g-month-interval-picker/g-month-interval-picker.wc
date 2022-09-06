@@ -1,0 +1,18 @@
+<template>
+	<main>
+		<g-window-header>
+			Selecione um período
+			<a id='close' href="#">
+				&#X1011;
+			</a>
+		</g-window-header>
+		<g-window-section>
+			<g-month-interval-selector>
+			</g-month-interval-selector>
+		</g-window-section>
+		<g-window-footer>
+			<a id='commit' href='#'>
+			</a>
+		</g-window-footer>
+	</main>
+</template>
