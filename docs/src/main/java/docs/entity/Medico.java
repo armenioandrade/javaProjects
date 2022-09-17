@@ -73,4 +73,10 @@ public class Medico {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Medico{" + "nome=" + nome + ", cpf=" + cpf + ", crm=" + crm + ", sexo=" + sexo + ", id=" + id + '}';
+    }
+    
+
 }

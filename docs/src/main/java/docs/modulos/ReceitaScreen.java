@@ -29,14 +29,11 @@ public class ReceitaScreen extends Screen {
     private Receita form;
 
     public String call() {
-        {
-            if (isPOST()) 
-                page = rcontrol.search(getForm());
+        mcontrol = new MedicoControl();
+        
+                return "/WEB-INF/views/docs/modulos/Receita/View.jsp";
                 
-                return "WEB-INF/views/docs/modulos/receita/GateView.jsp";
-            }
-            
-        }
+    }   
 
     
 

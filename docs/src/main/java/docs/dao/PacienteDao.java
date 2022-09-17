@@ -84,5 +84,12 @@ public class PacienteDao extends Dao
 			.orElseThrow(NotFoundException::new);
 
 	}
+        	public List<Paciente> searchAll()
+	{
+		return Select.of(getClass().getResource("PacienteDao/search(Paciente).sql"))
+                        .build()
+                        .connect(getLink())
+                        .fetchEntityList(Paciente.class);
 
+}
 }

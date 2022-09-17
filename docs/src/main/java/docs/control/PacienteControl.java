@@ -56,5 +56,12 @@ public class PacienteControl extends Control
 			dao.delete(paciente);
 		}
 	}
+        public List<Paciente> searchAll()
+	{
+		try ( PacienteDao dao = new PacienteDao())
+		{
+			return dao.searchAll();
+		}
+	} 
 
 }

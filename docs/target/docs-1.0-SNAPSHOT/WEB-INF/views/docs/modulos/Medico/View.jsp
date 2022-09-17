@@ -8,7 +8,7 @@
 <g:template filename="/WEB-INF/views/FULL.jsp">
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <div>
-        modulos/medico/view
+        modulos/medico/view      
     </div>
     <div>
         <form method="POST" action="#">

@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete", "/report", "/combobox"})
+@WebServlet(urlPatterns = {"/Controller", "/main", "/insert", "/select", "/update", "/delete", "/report", "/combobox", "/armenio"})
 public class Controller extends HttpServlet {
 
     DAO dao = new DAO();
     JavaBeans contato = new JavaBeans();
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

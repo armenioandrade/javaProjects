@@ -1,8 +1,0 @@
-docs\entity\Paciente.class
-docs\control\PacienteControl.class
-docs\dao\PacienteDao.class
-docs\modulos\PacienteScreen.class
-docs\entity\Medico.class
-docs\type\Sexo.class
-docs\modulos\Screen.class
-docs\modulos\MedicoScreen.class
