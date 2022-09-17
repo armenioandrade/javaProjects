@@ -15,7 +15,7 @@
             <label data-size="3">
                 Medico:
                 <span>
-                    <g:select property="form.mcontrol.select(1)"/>
+                    Médicos Encontrados: ${screen.mcontrol.searchAll().size()}
                 </span>
             </label>
             <label data-size="3">

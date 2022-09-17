@@ -17,21 +17,23 @@ import gate.error.AppException;
 import gate.error.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 
 @CopyIcon(Receita.class)
 @CopyName(Receita.class)
 public class ReceitaScreen extends Screen {
-
-    private List<Receita> page;
-    private MedicoControl mcontrol;
+    
     private PacienteControl pcontrol;
+    @Inject
     private ReceitaControl rcontrol;
     private Receita form;
+    private List<Receita> page;
+    private MedicoControl mcontrol;
 
     public String call() {
         mcontrol = new MedicoControl();
         
-                return "/WEB-INF/views/docs/modulos/Receita/View.jsp";
+                return "/WEB-INF/views/docs/modulos/Receita/GateView.jsp";
                 
     }   
 
@@ -127,6 +129,8 @@ public class ReceitaScreen extends Screen {
     }
 
     public MedicoControl getMcontrol() {
+        if(mcontrol == null)
+            mcontrol = new MedicoControl();
         return mcontrol;
     }
 
