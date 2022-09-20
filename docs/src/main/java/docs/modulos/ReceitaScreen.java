@@ -29,7 +29,9 @@ public class ReceitaScreen extends Screen {
     private Receita form;
     private List<Receita> page;
     private MedicoControl mcontrol;
-
+    private MedicoScreen mscreen;
+    private Medico medico;
+    
     public String call() {
         mcontrol = new MedicoControl();
         
@@ -166,5 +168,26 @@ public class ReceitaScreen extends Screen {
     public void setForm(Receita form) {
         this.form = form;
     }
+
+    public MedicoScreen getMscreen() {
+        return mscreen;
+    }
+
+    public void setMscreen(MedicoScreen mscreen) {
+        this.mscreen = mscreen;
+    }
+
+    public Medico getMedico() {
+        if(medico == null){
+            medico = new  Medico();
+        }
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
+    }
+    
+    
 
 }

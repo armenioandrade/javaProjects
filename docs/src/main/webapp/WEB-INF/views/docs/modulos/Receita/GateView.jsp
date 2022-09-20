@@ -9,24 +9,26 @@
             <label data-size="16">
                 Descricao:
                 <span>
-                    <g:text property="form.descricao" required=""/>
+                    <g:textarea property="form.descricao"/>
                 </span>
             </label>
             <label data-size="3">
                 Medico:
                 <span>
-                    Médicos Encontrados: ${screen.mcontrol.searchAll().size()}
+                    
                 </span>
             </label>
             <label data-size="3">
                 Paciente:
                 <span>
-                    <select>
-                        <option></option>
-                    </select>
+    
                 </span>
             </label>
 
         </fieldset>
     </form>	
+                    
+                    <g:print value="TESTE"/>              
+                    <g:print value="${SCREEN}"/>              
+                    <g:print value="${form.descricao}"/>              
 </g:template>
