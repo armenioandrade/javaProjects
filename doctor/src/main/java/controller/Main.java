@@ -1,9 +1,10 @@
 
 package controller;
 
-import dao.MedicoDao;
-import entity.Medico;
+import dao.PacienteDao;
+import entity.Paciente;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,18 +12,21 @@ import java.util.logging.Logger;
 public class Main {
  
     public static void main(String[] args) {
-        /*
         
-        Medico medico = new Medico("Armenio", "123", "321", "M");
-        MedicoDao dao = new MedicoDao();
-        Object object = new  Object();
-        object = medico;
+        
+      Paciente p = new  Paciente();
+      p.setCpf("123");
+      p.setDataNascimento(LocalDate.now());
+      p.setNome("carmelo");
+      p.setSexo("masc");
+        PacienteDao pd = new PacienteDao();
         try {
-            dao.create(medico);
+            pd.create(p);
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(object.toString());
-        */
+      
+        System.out.println(p.toString());
+        
     }
 }

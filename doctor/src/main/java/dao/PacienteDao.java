@@ -1,12 +1,15 @@
 package dao;
 
+import entity.Medico;
 import entity.Paciente;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneId;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,17 +31,17 @@ public class PacienteDao implements Dao {
         return false;
     }
     
-    @Override
+    
     public void create(Paciente paciente) throws SQLException {
 
         try {
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(INSERT);
 
-            ps.setString(1, paciente.getNome());
-            ps.setString(2, paciente.getCpf());
+            ps.setString(1, paciente.getCpf());
+            ps.setString(2, paciente.getDataNascimento().toString());    
             ps.setString(3, paciente.getSexo());
-            ps.setDate(4, paciente.getDataNascimento());    
+            ps.setString(4, paciente.getNome());
             ps.executeUpdate();
             ps.close();
 
@@ -58,7 +61,7 @@ public class PacienteDao implements Dao {
 
             ps.setString(1, paciente.getNome());
             ps.setString(2, paciente.getCpf());
-            ps.setString(3, paciente.getCrm());
+            ps.setDate(3, (Date) Date.from(paciente.getDataNascimento().atStartOfDay(ZoneId.systemDefault()).toInstant()));    
             ps.setString(4, paciente.getSexo());
             ps.executeUpdate();
             ps.close();
@@ -116,7 +119,7 @@ public class PacienteDao implements Dao {
             if (resultSet.next()) {
                 paciente.setNome(resultSet.getString("nome"));
                 paciente.setCpf(resultSet.getString("cpf"));
-                paciente.setCrm(resultSet.getString("crm"));
+                paciente.setDataNascimento(resultSet.getDate("dataNascimento").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 paciente.setSexo(resultSet.getString("sexo"));
 
             }
@@ -149,7 +152,7 @@ public class PacienteDao implements Dao {
                 paciente.setId(resultSet.getInt("id"));
                 paciente.setNome(resultSet.getString("nome"));
                 paciente.setCpf(resultSet.getString("cpf"));
-                paciente.setCrm(resultSet.getString("crm"));
+                paciente.setDataNascimento(resultSet.getDate("dataNascimento").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 paciente.setSexo(resultSet.getString("sexo"));
                 System.out.println(paciente.toString());
                 pacientes.add(paciente);
@@ -195,6 +198,11 @@ public class PacienteDao implements Dao {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public void create(Medico medico) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 
