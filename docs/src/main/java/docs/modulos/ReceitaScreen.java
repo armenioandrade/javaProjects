@@ -31,10 +31,13 @@ public class ReceitaScreen extends Screen {
     private MedicoControl mcontrol;
     private MedicoScreen mscreen;
     private Medico medico;
+    private List<Medico> pageMedico;
     
     public String call() {
-        mcontrol = new MedicoControl();
         
+                if(isPOST()){
+                    pageMedico = mcontrol.searchAll();
+                }
                 return "/WEB-INF/views/docs/modulos/Receita/GateView.jsp";
                 
     }   
@@ -188,6 +191,11 @@ public class ReceitaScreen extends Screen {
         this.medico = medico;
     }
     
-    
+        public List<Medico> getPageMedico() {
+        if (pageMedico == null) {
+            pageMedico = new ArrayList<>();
+        }
+        return pageMedico;
+    }
 
 }
