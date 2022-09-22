@@ -139,9 +139,8 @@ public class PacienteDao implements Dao {
      * @return
      * @throws SQLException
      */
-    @Override
-    public List<Object> findAll() throws SQLException {
-        List<Object> pacientes = new LinkedList<Object>();
+    public List<Paciente> findAll() throws SQLException {
+        List<Paciente> pacientes = new LinkedList<Paciente>();
 
         try {
             Statement statement = DBConnection.getConnection().createStatement();

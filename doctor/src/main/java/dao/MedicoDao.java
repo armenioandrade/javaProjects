@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -136,9 +137,8 @@ public class MedicoDao implements Dao {
      * @return
      * @throws SQLException
      */
-    @Override
-    public List<Object> findAll() throws SQLException {
-        List<Object> medicos = new LinkedList<Object>();
+    public List<Medico> findAll() throws SQLException {
+        List<Medico> medicos = new ArrayList<Medico>();
 
         try {
             Statement statement = DBConnection.getConnection().createStatement();

@@ -1,6 +1,7 @@
 
 package controller;
 
+import dao.MedicoDao;
 import dao.PacienteDao;
 import entity.Paciente;
 import java.sql.SQLException;
@@ -13,20 +14,13 @@ public class Main {
  
     public static void main(String[] args) {
         
-        
-      Paciente p = new  Paciente();
-      p.setCpf("123");
-      p.setDataNascimento(LocalDate.now());
-      p.setNome("carmelo");
-      p.setSexo("masc");
-        PacienteDao pd = new PacienteDao();
+        MedicoDao dao = new MedicoDao();
         try {
-            pd.create(p);
+            System.out.println(dao.findAll().toString());
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-        System.out.println(p.toString());
+        
         
     }
 }

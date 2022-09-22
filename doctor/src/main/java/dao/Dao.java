@@ -13,5 +13,4 @@ public interface Dao {
     public void delete(int id) throws SQLException;
     public void truncateTable() throws SQLException;
     public Object getDetailsById(int id) throws SQLException;
-    public List<Object> findAll() throws SQLException;
 }
