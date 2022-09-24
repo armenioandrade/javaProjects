@@ -19,16 +19,16 @@ public class MedicoDao implements Dao {
     private static final String TRUNCATE = "TRUNCATE medico";
     private static final String FIND_BY_ID = "SELECT * FROM medico WHERE id=?";
     private static final String FIND_ALL = "SELECT * FROM medico ORDER BY id";
-    private static final String INSERT = "INSERT INTO Medico (nome, cpf, crm, sexo) VALUES (?,?,?,?)";
+    private static final String INSERT = "INSERT INTO medico (nome, cpf, crm, sexo) VALUES (?,?,?,?)";
     private static final String UPDATE = "UPDATE medico SET nome=?, cpf=?, crm=?, sexo=? WHERE id=?";
     Medico medico = new Medico();
 
     @Override
     public boolean authenticate(String eMail, String password) throws SQLException {
-        
+
         return false;
     }
-    
+
     @Override
     public void create(Medico medico) throws SQLException {
 
@@ -134,44 +134,40 @@ public class MedicoDao implements Dao {
 
     /**
      *
-     * @return
-     * @throws SQLException
+     * @return @throws SQLException
      */
-    public List<Medico> findAll() throws SQLException {
-        List<Medico> medicos = new ArrayList<Medico>();
+    public ArrayList<Medico> findAll() {
+        ArrayList<Medico> medicos = new ArrayList<Medico>();
 
         try {
-            Statement statement = DBConnection.getConnection().createStatement();
+            PreparedStatement statement = DBConnection.getConnection().prepareStatement(FIND_ALL);
             ResultSet resultSet = statement.executeQuery(FIND_ALL);
 
             while (resultSet.next()) {
-
-                medico.setId(resultSet.getInt("id"));
-                medico.setNome(resultSet.getString("nome"));
-                medico.setCpf(resultSet.getString("cpf"));
-                medico.setCrm(resultSet.getString("crm"));
-                medico.setSexo(resultSet.getString("sexo"));
-                System.out.println(medico.toString());
-                medicos.add(medico);
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String cpf = resultSet.getString("cpf");
+                String crm = resultSet.getString("crm");
+                String sexo = resultSet.getString("sexo");
+                //System.out.println(medico.toString());    
+                medicos.add(new Medico(id, nome, cpf, crm, sexo));
             }
 
             resultSet.close();
             statement.close();
-
-        } catch (SQLException e) {
-            //e.printStackTrace();
+            return medicos;
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        return medicos;
     }
-    
-     public Connection getConnection() {
- 
+
+    public Connection getConnection() {
+
         String dbURL = "jdbc:mysql://localhost:3306/docs";
         String dbUser = "root";
         String dbPassword = "NS@DQX1s";
- 
+
         try {
             if (conn == null) {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -181,11 +177,11 @@ public class MedicoDao implements Dao {
             //e.printStackTrace();
             throw new RuntimeException(e);
         }
- 
+
         return conn;
- 
+
     }
- 
+
     public void closeConnection() {
         if (conn != null) {
             try {
@@ -196,6 +192,5 @@ public class MedicoDao implements Dao {
             }
         }
     }
-
 
 }

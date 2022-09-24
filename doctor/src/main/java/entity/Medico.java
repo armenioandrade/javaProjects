@@ -23,6 +23,14 @@ public class Medico {
 
     public Medico() {
     }
+    
+    public Medico(int id, String nome, String cpf, String crm, String sexo) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.crm = crm;
+        this.sexo = sexo;
+        this.id = id;
+    }
 
     
     
