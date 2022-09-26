@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class PacienteDao implements Dao {
     private static final String DELETE = "DELETE FROM paciente WHERE id=?";
     private static final String TRUNCATE = "TRUNCATE paciente";
     private static final String FIND_BY_ID = "SELECT * FROM paciente WHERE id=?";
-    private static final String FIND_ALL = "SELECT * FROM paciente ORDER BY id";
-    private static final String INSERT = "INSERT INTO Paciente (cpf,dataNascimento,sexo,nome) VALUES (?,?,?,?)";
+    private static final String FIND_ALL = "SELECT * FROM paciente ORDER BY nome";
+    private static final String INSERT = "INSERT INTO paciente (cpf,dataNascimento,sexo,nome) VALUES (?,?,?,?)";
     private static final String UPDATE = "UPDATE paciente SET nome=?, cpf=?, dataNascimento=?, sexo=? WHERE id=?";
     Paciente paciente = new Paciente();
 
@@ -37,9 +39,9 @@ public class PacienteDao implements Dao {
         try {
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(INSERT);
-
+            
             ps.setString(1, paciente.getCpf());
-            ps.setString(2, paciente.getDataNascimento().toString());    
+            ps.setDate(2, java.sql.Date.valueOf(paciente.getDataNascimento()));
             ps.setString(3, paciente.getSexo());
             ps.setString(4, paciente.getNome());
             ps.executeUpdate();
@@ -73,6 +75,27 @@ public class PacienteDao implements Dao {
             throw new RuntimeException(e);
         }
     }
+    
+    public void update(Paciente paciente) throws SQLException {
+        try {
+
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(UPDATE);
+
+            ps.setString(1, paciente.getNome());
+            ps.setString(2, paciente.getCpf());
+            ps.setDate(3, java.sql.Date.valueOf(paciente.getDataNascimento()));    
+            ps.setString(4, paciente.getSexo());
+            ps.setInt(5, paciente.getId());
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Paciente with id " + paciente.getId() + " was updated in DB with following details: " + paciente.toString());
+
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void delete(int id) throws SQLException {
@@ -85,6 +108,23 @@ public class PacienteDao implements Dao {
             ps.close();
 
             System.out.println("Paciente with id: " + id + " was sucesfully deleted from DB.");
+
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public void delete(Paciente paciente) throws SQLException {
+        try {
+
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(DELETE);
+
+            ps.setInt(1, paciente.getId());
+            ps.executeUpdate();
+            ps.close();
+
+            System.out.println("Paciente with id: " + paciente.getId() + " was sucesfully deleted from DB.");
 
         } catch (SQLException e) {
             //e.printStackTrace();
@@ -108,29 +148,30 @@ public class PacienteDao implements Dao {
         }
     }
 
-    @Override
-    public Object getDetailsById(int id) throws SQLException {
+   
+    public Paciente getDetailsById(Paciente paciente) throws SQLException {
         try {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(FIND_BY_ID);
-            ps.setInt(1, id); // Set 1st WHERE to int
+            ps.setInt(1, paciente.getId()); // Set 1st WHERE to int
 
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
                 paciente.setNome(resultSet.getString("nome"));
                 paciente.setCpf(resultSet.getString("cpf"));
-                paciente.setDataNascimento(resultSet.getDate("dataNascimento").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                paciente.setDataNascimento(resultSet.getDate("dataNascimento").toLocalDate());
                 paciente.setSexo(resultSet.getString("sexo"));
 
             }
 
             resultSet.close();
             ps.close();
-
+            
         } catch (SQLException e) {
             //e.printStackTrace();
             throw new RuntimeException(e);
         }
+        System.out.println("paciente no dao: "+paciente.toString());
         return paciente;
     }
 
@@ -139,8 +180,8 @@ public class PacienteDao implements Dao {
      * @return
      * @throws SQLException
      */
-    public List<Paciente> findAll() throws SQLException {
-        List<Paciente> pacientes = new LinkedList<Paciente>();
+    public ArrayList<Paciente> findAll() throws SQLException {
+        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
         try {
             Statement statement = DBConnection.getConnection().createStatement();
@@ -148,13 +189,12 @@ public class PacienteDao implements Dao {
 
             while (resultSet.next()) {
 
-                paciente.setId(resultSet.getInt("id"));
-                paciente.setNome(resultSet.getString("nome"));
-                paciente.setCpf(resultSet.getString("cpf"));
-                paciente.setDataNascimento(resultSet.getDate("dataNascimento").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                paciente.setSexo(resultSet.getString("sexo"));
-                System.out.println(paciente.toString());
-                pacientes.add(paciente);
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String cpf = resultSet.getString("cpf");
+                Date data = resultSet.getDate("dataNascimento");
+                String sexo = resultSet.getString("sexo");
+                pacientes.add(new Paciente(id, sexo, cpf, nome, data.toLocalDate()));
             }
 
             resultSet.close();
@@ -201,6 +241,11 @@ public class PacienteDao implements Dao {
 
     @Override
     public void create(Medico medico) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Medico getDetailsById(Medico medico) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

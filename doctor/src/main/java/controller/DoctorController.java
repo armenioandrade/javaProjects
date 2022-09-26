@@ -4,11 +4,9 @@ import dao.MedicoDao;
 import entity.Medico;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/DoctorController", "/insert", "/view", "/delete", "/DoctorView"})
+@WebServlet(urlPatterns = {"/DoctorController", "/DoctorInsert", "/view", "/DoctorDelete", "/DoctorView", "/DoctorUpdate", "/DoctorSelect"})
 public class DoctorController extends HttpServlet {
 
     Medico medico = new Medico();
@@ -33,16 +31,20 @@ public class DoctorController extends HttpServlet {
 
         switch (path) {
             case "/view":
+                System.out.println(path);
                 response.sendRedirect(("index.jsp"));
-                System.out.println(path);
                 break;
-            case "/delete":
-                delete(request, response);
+            case "/DoctorDelete":
                 System.out.println(path);
+                delete(request, response);
                 break;
             case "/DoctorView":
                 System.out.println(path);
                 findAllMedico(request, response);
+                break;
+            case "/DoctorSelect":
+                System.out.println(path);
+                getMedicoById(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -56,8 +58,13 @@ public class DoctorController extends HttpServlet {
         PrintWriter pw = response.getWriter();
         String path = request.getServletPath();
         switch (path) {
-            case "/insert":
+            case "/DoctorInsert":
+                System.out.println(path);
                 createMedico(request, response);
+                break;
+            case "/DoctorUpdate":
+                System.out.println(path);
+                updateMedico(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -79,7 +86,7 @@ public class DoctorController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        response.sendRedirect(request.getContextPath() + "/view");
+        response.sendRedirect(request.getContextPath() + "/DoctorView");
     }
 
     protected void findAllMedico(HttpServletRequest request, HttpServletResponse response)
@@ -94,14 +101,45 @@ public class DoctorController extends HttpServlet {
 
     protected void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Setar as variaveis JavaBeans
         medico.setId(Integer.valueOf(request.getParameter("id")));
-        //redirecionar para o documento agenda.jsp (atualizando as alteracoes)
         try {
             dao.delete(medico.getId());
         } catch (Exception e) {
         }
-        response.sendRedirect(request.getContextPath()+"/DoctorView");
+        response.sendRedirect(request.getContextPath() + "/DoctorView");
     }
 
+    protected void getMedicoById(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        medico.setId(Integer.valueOf(request.getParameter("id")));
+        
+        try {
+            dao.getDetailsById(medico);
+        } catch (Exception e) {
+        }
+        request.setAttribute("id", medico.getId());
+        request.setAttribute("nome", medico.getNome());
+        request.setAttribute("cpf", medico.getCpf());
+        request.setAttribute("crm", medico.getCrm());
+        request.setAttribute("sexo", medico.getSexo());
+        
+        RequestDispatcher rd = request.getRequestDispatcher("DoctorEdit.jsp");
+        rd.forward(request, response);
+        
+    }
+
+    protected void updateMedico(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        medico.setId(Integer.parseInt(request.getParameter("id")));
+        medico.setNome(request.getParameter("nome"));
+        medico.setCrm(request.getParameter("crm"));
+        medico.setCpf(request.getParameter("cpf"));
+        medico.setSexo(request.getParameter("sexo"));
+        try {
+            dao.update(medico);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        response.sendRedirect(request.getContextPath() + "/DoctorView");
+    }
 }

@@ -1,28 +1,25 @@
 
+<%@page import="entity.Paciente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@page import="dao.MedicoDao"%>
 <%@page import="java.util.List" %>
-<%@page import="entity.Medico" %>
 <%@page import="java.util.ArrayList" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Médicos</title>
+        <title>Lista de Pacientes</title>
         <script defer src="/doctor/scripts/validador.js"></script>
     </head>
     <body>
         <h1>Doctor</h1>
-        <a href="DoctorInsert.jsp">Inserir Médico</a>
-        <a href="DoctorView">Visualizar Médico</a>
         <a href="PacientInsert.jsp">Inserir Paciente</a>
         <a href="PacientView">Visualizar Paciente</a>
         <a href="index.jsp">Voltar</a>
-        <h1>Lista de Médicos</h1>
+        <h1>Lista de Pacientes</h1>
         <%
-            ArrayList<Medico> lista = (ArrayList<Medico>) request.getAttribute("medicos");
+            ArrayList<Paciente> lista = (ArrayList<Paciente>) request.getAttribute("pacientes");
 
-            out.print("Quantidade de médicos: " + lista.size());
+            out.print("Quantidade de Pacientes " + lista.size());
         %>
 
         <table id="tabela">
@@ -32,7 +29,7 @@
                     <th>Nome</th>
                     <th>Sexo</th>
                     <th>CPF</th>
-                    <th>CRM</th>
+                    <th>Data de Nascimento</th>
                     <th>Opções</th>
                 </tr>
             </thead>
@@ -45,8 +42,8 @@
                     <td> <%= lista.get(i).getNome()%> </td>
                     <td> <%= lista.get(i).getSexo()%> </td>
                     <td> <%= lista.get(i).getCpf()%> </td>
-                    <td> <%= lista.get(i).getCrm()%> </td>
-                    <td><a href="DoctorSelect?id=<%=lista.get(i).getId()%>" class="botao1">Editar</a>
+                    <td> <%= lista.get(i).getDataNascimento()%> </td>
+                    <td><a href="PacientSelect?id=<%=lista.get(i).getId()%>" class="botao1">Editar</a>
                         <a href="javascript: confirmarDelete(<%=lista.get(i).getId()%>)" class="botao2">Excluir</a>
                     </td>
 

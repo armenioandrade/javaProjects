@@ -14,6 +14,24 @@ public class Paciente {
 
     private LocalDate dataNascimento;
 
+    public Paciente(int id, String sexo, String cpf, String nome, LocalDate dataNascimento) {
+        this.id = id;
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Paciente(String sexo, String cpf, String nome, LocalDate dataNascimento) {
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+    }
+
+    public Paciente() {
+    }
+
     public int getId() {
         return id;
     }
@@ -66,6 +84,5 @@ public class Paciente {
     public String toString() {
         return "Paciente{" + "id=" + id + ", sexo=" + sexo + ", cpf=" + cpf + ", nome=" + nome + ", dataNascimento=" + dataNascimento + '}';
     }
-    
-    
+
 }

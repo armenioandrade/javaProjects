@@ -18,7 +18,7 @@ public class MedicoDao implements Dao {
     private static final String DELETE = "DELETE FROM medico WHERE id=?";
     private static final String TRUNCATE = "TRUNCATE medico";
     private static final String FIND_BY_ID = "SELECT * FROM medico WHERE id=?";
-    private static final String FIND_ALL = "SELECT * FROM medico ORDER BY id";
+    private static final String FIND_ALL = "SELECT * FROM medico ORDER BY nome";
     private static final String INSERT = "INSERT INTO medico (nome, cpf, crm, sexo) VALUES (?,?,?,?)";
     private static final String UPDATE = "UPDATE medico SET nome=?, cpf=?, crm=?, sexo=? WHERE id=?";
     Medico medico = new Medico();
@@ -51,8 +51,7 @@ public class MedicoDao implements Dao {
         }
     }
 
-    @Override
-    public void update(Object obj) throws SQLException {
+    public void update(Medico medico) throws SQLException {
         try {
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(UPDATE);
@@ -61,10 +60,11 @@ public class MedicoDao implements Dao {
             ps.setString(2, medico.getCpf());
             ps.setString(3, medico.getCrm());
             ps.setString(4, medico.getSexo());
+            ps.setInt(5, medico.getId());
             ps.executeUpdate();
             ps.close();
 
-            System.out.println("Medico with id " + medico.getId() + " was updated in DB with following details: " + obj.toString());
+            System.out.println("Medico with id " + medico.getId() + " was updated in DB with following details: " + medico.toString());
 
         } catch (SQLException e) {
             //e.printStackTrace();
@@ -106,11 +106,10 @@ public class MedicoDao implements Dao {
         }
     }
 
-    @Override
-    public Object getDetailsById(int id) throws SQLException {
+    public Medico getDetailsById(Medico medico) throws SQLException {
         try {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(FIND_BY_ID);
-            ps.setInt(1, id); // Set 1st WHERE to int
+            ps.setInt(1, medico.getId()); // Set 1st WHERE to int
 
             ResultSet resultSet = ps.executeQuery();
 
@@ -191,6 +190,11 @@ public class MedicoDao implements Dao {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @Override
+    public void update(Object obj) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

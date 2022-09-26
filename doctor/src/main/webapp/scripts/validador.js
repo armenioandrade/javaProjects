@@ -21,13 +21,18 @@ function validar() {
 }
 
 function confirmarDelete(id) {
-
+    let url = window.location.href
+    let arrayUrl = url.split('/')
+    let path = arrayUrl[arrayUrl.length - 1]
+    console.log(arrayUrl)
+    console.log(path)
     let condicao = confirm('Confirma exclusão do registro?')
     if (condicao === true) {
-        window.location.href = "delete?id=" + id
-    } else {
-
-    }
+        if(path === 'PacientView'){
+            window.location.href = 'PacientDelete?id='+id
+        } else if(path === 'DoctorView')
+        window.location.href = 'DoctorDelete?id='+id
+    } 
 
 
 }
