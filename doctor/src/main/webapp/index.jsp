@@ -12,5 +12,6 @@
         <a href="DoctorView">Visualizar Médico</a>
         <a href="PacientInsert.jsp">Inserir Paciente</a>
         <a href="PacientView">Visualizar Paciente</a>
+        <a href="ReceitaInsertView">Inserir Receita</a>
     </body>
 </html>

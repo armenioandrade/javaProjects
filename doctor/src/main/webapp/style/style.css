@@ -1,0 +1,23 @@
+.cadastro{
+    display: block;
+    background-color: aliceblue;
+    width: 300px;
+    height: 600px;
+}
+#formDefault{
+    display: block;
+    
+}
+#formDefault textarea{
+    width: 100%;
+    height: 500px;
+}
+#formDefault input{
+    display: block;
+}
+#formDefault select{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+

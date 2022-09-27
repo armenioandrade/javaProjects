@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -141,5 +143,17 @@ public class DoctorController extends HttpServlet {
             System.out.println(e.getMessage());
         }
         response.sendRedirect(request.getContextPath() + "/DoctorView");
+    }
+    
+        protected void findIdByName(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("findidbyname");
+        medico.setNome(request.getParameter("id"));
+        try {
+            dao.getIdByName(medico);
+        } catch (SQLException ex) {
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("/ReceitaInsert");
+        rd.forward(request, response);
     }
 }

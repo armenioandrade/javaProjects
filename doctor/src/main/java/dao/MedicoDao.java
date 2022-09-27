@@ -21,6 +21,7 @@ public class MedicoDao implements Dao {
     private static final String FIND_ALL = "SELECT * FROM medico ORDER BY nome";
     private static final String INSERT = "INSERT INTO medico (nome, cpf, crm, sexo) VALUES (?,?,?,?)";
     private static final String UPDATE = "UPDATE medico SET nome=?, cpf=?, crm=?, sexo=? WHERE id=?";
+    private static final String FIND_ID_BY_NAME = "SELECT id FROM medico WHERE nome = ?";
     Medico medico = new Medico();
 
     @Override
@@ -159,6 +160,28 @@ public class MedicoDao implements Dao {
             throw new RuntimeException(e);
         }
 
+    }
+    
+    public Medico getIdByName(Medico medico) throws SQLException {
+        try {
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(FIND_ID_BY_NAME);
+            ps.setString(1, medico.getNome()); // Set 1st WHERE to int
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                medico.setId(resultSet.getInt("id"));            
+
+            }
+
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return medico;
     }
 
     public Connection getConnection() {

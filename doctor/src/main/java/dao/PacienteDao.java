@@ -25,21 +25,21 @@ public class PacienteDao implements Dao {
     private static final String FIND_ALL = "SELECT * FROM paciente ORDER BY nome";
     private static final String INSERT = "INSERT INTO paciente (cpf,dataNascimento,sexo,nome) VALUES (?,?,?,?)";
     private static final String UPDATE = "UPDATE paciente SET nome=?, cpf=?, dataNascimento=?, sexo=? WHERE id=?";
+    private static final String FIND_ID_BY_NAME = "SELECT id FROM paciente WHERE nome = ?";
     Paciente paciente = new Paciente();
 
     @Override
     public boolean authenticate(String eMail, String password) throws SQLException {
-        
+
         return false;
     }
-    
-    
+
     public void create(Paciente paciente) throws SQLException {
 
         try {
 
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(INSERT);
-            
+
             ps.setString(1, paciente.getCpf());
             ps.setDate(2, java.sql.Date.valueOf(paciente.getDataNascimento()));
             ps.setString(3, paciente.getSexo());
@@ -63,7 +63,7 @@ public class PacienteDao implements Dao {
 
             ps.setString(1, paciente.getNome());
             ps.setString(2, paciente.getCpf());
-            ps.setDate(3, (Date) Date.from(paciente.getDataNascimento().atStartOfDay(ZoneId.systemDefault()).toInstant()));    
+            ps.setDate(3, (Date) Date.from(paciente.getDataNascimento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
             ps.setString(4, paciente.getSexo());
             ps.executeUpdate();
             ps.close();
@@ -75,7 +75,7 @@ public class PacienteDao implements Dao {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void update(Paciente paciente) throws SQLException {
         try {
 
@@ -83,7 +83,7 @@ public class PacienteDao implements Dao {
 
             ps.setString(1, paciente.getNome());
             ps.setString(2, paciente.getCpf());
-            ps.setDate(3, java.sql.Date.valueOf(paciente.getDataNascimento()));    
+            ps.setDate(3, java.sql.Date.valueOf(paciente.getDataNascimento()));
             ps.setString(4, paciente.getSexo());
             ps.setInt(5, paciente.getId());
             ps.executeUpdate();
@@ -114,7 +114,7 @@ public class PacienteDao implements Dao {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void delete(Paciente paciente) throws SQLException {
         try {
 
@@ -148,7 +148,6 @@ public class PacienteDao implements Dao {
         }
     }
 
-   
     public Paciente getDetailsById(Paciente paciente) throws SQLException {
         try {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(FIND_BY_ID);
@@ -166,19 +165,18 @@ public class PacienteDao implements Dao {
 
             resultSet.close();
             ps.close();
-            
+
         } catch (SQLException e) {
             //e.printStackTrace();
             throw new RuntimeException(e);
         }
-        System.out.println("paciente no dao: "+paciente.toString());
+        System.out.println("paciente no dao: " + paciente.toString());
         return paciente;
     }
 
     /**
      *
-     * @return
-     * @throws SQLException
+     * @return @throws SQLException
      */
     public ArrayList<Paciente> findAll() throws SQLException {
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
@@ -207,13 +205,35 @@ public class PacienteDao implements Dao {
 
         return pacientes;
     }
-    
-     public Connection getConnection() {
- 
+
+    public Paciente getIdByName(Paciente paciente) throws SQLException {
+        try {
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(FIND_ID_BY_NAME);
+            ps.setString(1, paciente.getNome()); // Set 1st WHERE to int
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                paciente.setId(resultSet.getInt("id"));
+
+            }
+
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return paciente;
+    }
+
+    public Connection getConnection() {
+
         String dbURL = "jdbc:mysql://localhost:3306/docs";
         String dbUser = "root";
         String dbPassword = "NS@DQX1s";
- 
+
         try {
             if (conn == null) {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -223,11 +243,11 @@ public class PacienteDao implements Dao {
             //e.printStackTrace();
             throw new RuntimeException(e);
         }
- 
+
         return conn;
- 
+
     }
- 
+
     public void closeConnection() {
         if (conn != null) {
             try {
@@ -248,6 +268,5 @@ public class PacienteDao implements Dao {
     public Medico getDetailsById(Medico medico) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 
 }

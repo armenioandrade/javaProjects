@@ -21,7 +21,7 @@
 
             ID: <input type="text" name="id" readonly="" value="<%out.print(request.getParameter("id"));%>">
             Nome:<input type="text" name="nome" value="<%out.print(request.getAttribute("nome"));%>"> 
-            Cpf:<input type="text" name="cpf" value="<%out.print(request.getAttribute("cpf"));%>">
+            CPF:<input type="text" name="cpf" value="<%out.print(request.getAttribute("cpf"));%>">
             Data de Nascimento:<input type="date" name="data" value="<%out.print(request.getAttribute("data"));%>">
             Sexo:
             <select name="sexo">
