@@ -15,6 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Visualização de receitas</title>
+        <script defer src="scripts/validador.js"></script>
     </head>
     <body>
         <a href="ReceitaView">Visualizar Receitas</a>
@@ -39,7 +40,7 @@
                     <td><%= lista.get(i).getMedico().getNome()%></td>
                     <td><%= lista.get(i).getPaciente().getNome()%></td>
                     <td><%= lista.get(i).getDescricao()%></td>
-                    <td><a href="ReceitaSelect?id=<%=lista.get(i).getId()%>" class="botao1">Editar</a>
+                    <td>
                         <a href="javascript: confirmarDelete(<%=lista.get(i).getId()%>)" class="botao2">Excluir</a>
                     </td>
 

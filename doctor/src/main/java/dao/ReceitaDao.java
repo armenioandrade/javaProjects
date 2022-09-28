@@ -93,6 +93,16 @@ public class ReceitaDao {
         return receita;
     }
 
+    public void delete(Receita receita){
+        try {
+            PreparedStatement ps = DBConnection.getConnection().prepareStatement(DELETE);
+            ps.setInt(1, receita.getId()); // Set 1st WHERE to int
+            ps.execute();
+
+        } catch (Exception e) {
+        }
+    }
+    
     public MedicoDao getMedicoDao() {
         if (medicoDao == null) {
             medicoDao = new MedicoDao();

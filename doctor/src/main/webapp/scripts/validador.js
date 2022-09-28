@@ -30,8 +30,11 @@ function confirmarDelete(id) {
     if (condicao === true) {
         if(path === 'PacientView'){
             window.location.href = 'PacientDelete?id='+id
-        } else if(path === 'DoctorView')
+        } else if(path === 'DoctorView'){
         window.location.href = 'DoctorDelete?id='+id
+    } else if(path === 'ReceitaView'){
+        window.window.location = 'ReceitaDelete?id='+id
+    }
     } 
 
 

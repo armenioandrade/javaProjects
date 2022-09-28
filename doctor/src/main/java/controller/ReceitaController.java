@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = {"/ReceitaController", "/ReceitaInsert", "/ReceitaInsertView", "/ReceitaView", "/ReceitaUpdate", "/ReceitaSelect"})
+@WebServlet(urlPatterns = {"/ReceitaController", "/ReceitaInsert", "/ReceitaInsertView", "/ReceitaView", "/ReceitaUpdate", "/ReceitaDelete"})
 public class ReceitaController extends HttpServlet {
 
     Receita receita = new Receita();
@@ -34,9 +34,9 @@ public class ReceitaController extends HttpServlet {
                 System.out.println(path);
                 findAllReceita(request, response);
                 break;
-            case "/ReceitaSelect":
+            case "/ReceitaDelete":
                 System.out.println(path);
-                getReceitaById(request, response);
+                deleteReceita(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -51,10 +51,6 @@ public class ReceitaController extends HttpServlet {
             case "/ReceitaInsert":
                 System.out.println(path);
                 createReceita(request, response);
-                break;
-            case "/ReceitaUpdate":
-                System.out.println(path);
-                getReceitaById(request, response);
                 break;
             default:
                 throw new AssertionError();
@@ -129,13 +125,12 @@ public class ReceitaController extends HttpServlet {
         rd.forward(request, response);
     }
 
-    protected void getReceitaById(HttpServletRequest request, HttpServletResponse response)
+    protected void deleteReceita(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("chegou-no-select-by-id");
-        request.getParameter("id");
-        request.getParameter("medico");
-        request.getParameter("paciente");
-        request.getParameter("descricao");
-        request.getParameter("data");
+        System.out.println("deleteReceita");
+        receita.setId(Integer.valueOf(request.getParameter("id")));
+        dao.delete(receita);
+        RequestDispatcher rd = request.getRequestDispatcher("ReceitaView");
+        rd.forward(request, response);
     }
 }
