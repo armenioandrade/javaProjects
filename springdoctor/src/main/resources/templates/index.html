@@ -17,11 +17,14 @@
             <th>Name</th>
             <th>CPF</th>
             <th>CRM</th>
+            <th>Opcoes</th>
         </tr>
         <tr th:each="doctor: ${lista}">
         <td th:text="${doctor.name}"></td>
         <td th:text="${doctor.cpf}"></td>
         <td th:text="${doctor.crm}"></td>
+            <td><a href="Edit">Editar</a></td>
+            <td><a href="DeleteDoctor" th:action="@{/Doctor/DeleteDoctor}">Deletar</a></td>
         </tr>
     </table>
 </body>

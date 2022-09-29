@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.print.Doc;
 
 
 @Controller
@@ -18,25 +20,11 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
 
-
-    @GetMapping(path="/add")
-    public @ResponseBody String addNewForm (@RequestParam String name, @RequestParam String cpf, @RequestParam String crm){
-        Doctor doctor = new Doctor();
-        doctor.setName(name);
-        doctor.setCpf(cpf);
-        doctor.setCrm(crm);
-        doctorRepository.save(doctor);
-        return "saved";
-    }
-
-    @PostMapping(path="/add")
-    public @ResponseBody String addNewDoctor (@RequestParam String name, @RequestParam String cpf, @RequestParam String crm){
-        Doctor doctor = new Doctor();
-        doctor.setName(name);
-        doctor.setCpf(cpf);
-        doctor.setCrm(crm);
-        doctorRepository.save(doctor);
-       return "saved";
+    @GetMapping(path = "")
+    public String index(Model model){
+        System.out.println("chegou no index");
+        model.addAttribute("lista", doctorRepository.findAll());
+        return "index";
     }
 
     @GetMapping(path = "/addDoctor")
@@ -50,19 +38,14 @@ public class DoctorController {
     public String addDoctorSubmit(@ModelAttribute Doctor doctor, Model model){
         System.out.println("chegou no postmapping adddoctor");
         doctorRepository.save(doctor);
-        return list(model, doctor);
+        return "cadastro";
     }
 
-    @GetMapping(path = "/list")
-    public String list(Model model, Doctor doctor){
-        model.addAttribute("lista", doctorRepository.findAll());
-        return "index";
-    }
-
-    @PostMapping(path = "/list")
-    public String listPost(Model model, Doctor doctor){
-        model.addAttribute("lista", doctorRepository.findAll());
-        return "index";
+    @GetMapping(path = "/DeleteDoctor")
+    public String deleteDoctor(@ModelAttribute Doctor doctor, Model model){
+        System.out.println("chegou no metodo deletar");
+        doctorRepository.delete(doctor);
+        return "/";
     }
 
     @Entity
