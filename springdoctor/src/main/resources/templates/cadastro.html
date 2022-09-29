@@ -13,15 +13,10 @@
     <p>Name<input type="text" name="name" th:field="*{name}"/></p>
     <p>CPF<input type="text" name="cpf" th:field="*{cpf}"/></p>
     <p>CRM<input type="text" name="crm" th:field="*{crm}"/></p>
-    <input type="submit" value="Cadastrar" onclick="myFunction()">
+    <input type="submit" value="Cadastrar" >
 </form>
-<script>
-function myFunction() {
-location.replace("http://127.0.0.1:8080/Doctor")
-}
-</script>
 
-<a href="">Voltar</a>
+<a href="/Doctor">Voltar</a>
 
 </body>
 </html>

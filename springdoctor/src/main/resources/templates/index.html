@@ -20,11 +20,14 @@
             <th>Opcoes</th>
         </tr>
         <tr th:each="doctor: ${lista}">
+        <td th:text="${doctor.id}"></td>
         <td th:text="${doctor.name}"></td>
         <td th:text="${doctor.cpf}"></td>
         <td th:text="${doctor.crm}"></td>
-            <td><a href="Edit">Editar</a></td>
-            <td><a href="DeleteDoctor" th:action="@{/Doctor/DeleteDoctor}">Deletar</a></td>
+        <td>
+            <a th:href="@{/Doctor/DeleteDoctor(doctorId=${doctor.id})}" class="btn btn-danger ml-2">Delete</a>
+        </td>
+
         </tr>
     </table>
 </body>
