@@ -1,14 +1,12 @@
 package controller;
 
+import control.MedicoControl;
 import dao.MedicoDao;
 import entity.Medico;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +19,7 @@ public class DoctorController extends HttpServlet {
 
     Medico medico = new Medico();
     MedicoDao dao = new MedicoDao();
+    MedicoControl control = new MedicoControl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -84,7 +83,7 @@ public class DoctorController extends HttpServlet {
         medico.setSexo(request.getParameter("selectSexo"));
         try {
 
-            dao.create(medico);
+            control.insert(medico);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -95,7 +94,7 @@ public class DoctorController extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("findall");
         ArrayList<Medico> lista = new ArrayList<Medico>();
-        lista = dao.findAll();
+        lista = control.list();
         request.setAttribute("medicos", lista);
         RequestDispatcher rd = request.getRequestDispatcher("DoctorView.jsp");
         rd.forward(request, response);
@@ -105,7 +104,7 @@ public class DoctorController extends HttpServlet {
             throws ServletException, IOException {
         medico.setId(Integer.valueOf(request.getParameter("id")));
         try {
-            dao.delete(medico.getId());
+            control.delete(medico.getId());
         } catch (Exception e) {
         }
         response.sendRedirect(request.getContextPath() + "/DoctorView");
@@ -116,7 +115,7 @@ public class DoctorController extends HttpServlet {
         medico.setId(Integer.valueOf(request.getParameter("id")));
         
         try {
-            dao.getDetailsById(medico);
+            control.selectById(medico.getId());
         } catch (Exception e) {
         }
         request.setAttribute("id", medico.getId());
@@ -138,8 +137,8 @@ public class DoctorController extends HttpServlet {
         medico.setCpf(request.getParameter("cpf"));
         medico.setSexo(request.getParameter("sexo"));
         try {
-            dao.update(medico);
-        } catch (SQLException e) {
+            control.update(medico);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         response.sendRedirect(request.getContextPath() + "/DoctorView");
@@ -148,10 +147,11 @@ public class DoctorController extends HttpServlet {
         protected void findIdByName(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("findidbyname");
-        medico.setNome(request.getParameter("id"));
+        medico.setNome(request.getParameter("name"));
         try {
-            dao.getIdByName(medico);
-        } catch (SQLException ex) {
+            control.selectByName(medico);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         RequestDispatcher rd = request.getRequestDispatcher("/ReceitaInsert");
         rd.forward(request, response);
