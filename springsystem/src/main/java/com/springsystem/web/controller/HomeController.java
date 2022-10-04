@@ -1,14 +1,13 @@
-package web.controller;
+package com.springsystem.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    
-   @GetMapping("/")
+
+    @GetMapping("/")
     public String home(){
-        System.out.println("chegou no /");
         return "/home";
     }
 }
