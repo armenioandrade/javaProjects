@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class MedicoDao implements Dao {
+public class MedicoDao {
 
     Connection conn = null;
     private static final String AUTHENTICATE = "SELECT * FROM medico WHERE email=? and password=?";
@@ -24,13 +24,11 @@ public class MedicoDao implements Dao {
     private static final String FIND_ID_BY_NAME = "SELECT id FROM medico WHERE nome = ?";
     Medico medico = new Medico();
 
-    @Override
     public boolean authenticate(String eMail, String password) throws SQLException {
 
         return false;
     }
 
-    @Override
     public void create(Medico medico) throws SQLException {
 
         try {
@@ -73,7 +71,6 @@ public class MedicoDao implements Dao {
         }
     }
 
-    @Override
     public void delete(int id) throws SQLException {
         try {
 
@@ -107,10 +104,10 @@ public class MedicoDao implements Dao {
         }
     }
 
-    public Medico getDetailsById(Medico medico) throws SQLException {
+    public Medico getDetailsById(int id) throws SQLException {
         try {
             PreparedStatement ps = DBConnection.getConnection().prepareStatement(FIND_BY_ID);
-            ps.setInt(1, medico.getId()); // Set 1st WHERE to int
+            ps.setInt(1, id); // Set 1st WHERE to int
 
             ResultSet resultSet = ps.executeQuery();
 
@@ -132,10 +129,6 @@ public class MedicoDao implements Dao {
         return medico;
     }
 
-    /**
-     *
-     * @return @throws SQLException
-     */
     public ArrayList<Medico> findAll() {
         ArrayList<Medico> medicos = new ArrayList<Medico>();
 
@@ -181,6 +174,7 @@ public class MedicoDao implements Dao {
             //e.printStackTrace();
             throw new RuntimeException(e);
         }
+        System.out.println("consulta realizada, id: "+medico.getId());
         return medico;
     }
 
@@ -215,7 +209,6 @@ public class MedicoDao implements Dao {
         }
     }
 
-    @Override
     public void update(Object obj) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

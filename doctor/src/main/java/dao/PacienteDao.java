@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PacienteDao implements Dao {
+public class PacienteDao {
 
     Connection conn = null;
     private static final String AUTHENTICATE = "SELECT * FROM paciente WHERE email=? and password=?";
@@ -28,7 +28,6 @@ public class PacienteDao implements Dao {
     private static final String FIND_ID_BY_NAME = "SELECT id FROM paciente WHERE nome = ?";
     Paciente paciente = new Paciente();
 
-    @Override
     public boolean authenticate(String eMail, String password) throws SQLException {
 
         return false;
@@ -55,7 +54,6 @@ public class PacienteDao implements Dao {
         }
     }
 
-    @Override
     public void update(Object obj) throws SQLException {
         try {
 
@@ -97,7 +95,6 @@ public class PacienteDao implements Dao {
         }
     }
 
-    @Override
     public void delete(int id) throws SQLException {
         try {
 
@@ -174,10 +171,7 @@ public class PacienteDao implements Dao {
         return paciente;
     }
 
-    /**
-     *
-     * @return @throws SQLException
-     */
+
     public ArrayList<Paciente> findAll() throws SQLException {
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 
@@ -259,12 +253,10 @@ public class PacienteDao implements Dao {
         }
     }
 
-    @Override
     public void create(Medico medico) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public Medico getDetailsById(Medico medico) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

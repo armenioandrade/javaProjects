@@ -66,8 +66,6 @@ public class ReceitaController extends HttpServlet {
             listaPacientes = dao.getPacienteDao().findAll();
         } catch (SQLException ex) {
         }
-        System.out.println(listaMedicos.toString());
-        System.out.println(listaPacientes.toString());
         System.out.println("Enviando atributos");
         request.setAttribute("medicos", listaMedicos);
         request.setAttribute("pacientes", listaPacientes);
@@ -121,6 +119,7 @@ public class ReceitaController extends HttpServlet {
         } catch (Exception e) {
         }
         request.setAttribute("receitas", lista);
+        System.out.println(lista.toString());
         RequestDispatcher rd = request.getRequestDispatcher("ReceitaView.jsp");
         rd.forward(request, response);
     }
