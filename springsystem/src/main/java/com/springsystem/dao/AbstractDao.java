@@ -9,6 +9,11 @@ import java.util.List;
 
 public class AbstractDao<T, PK extends Serializable> {
 
+    /*
+    * Nesta classe estão implementados os métodos que fazem acesso ao banco via SQL.
+    * Tudo isso utilizando objeto genérico T e a classe EntityManager.
+    * */
+
     private final Class<T> entityClass =
             (Class<T>) ( (ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
