@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,7 +35,23 @@ public class DepartamentoController {
     }
     
     @GetMapping("/editar/{id}")
-    public String preEditar(){
-        return null;
+    public String preEditar(@PathVariable("id") Long id, Model model){
+        model.addAttribute("departamento", service.buscarPorId(id));
+        return "/departamento/cadastro";
+    }
+
+    @PostMapping("/editar")
+    public String editar(Departamento departamento){
+        service.editar(departamento);
+        return "redirect:/departamentos/listar";
+    }
+
+    @GetMapping("/departamentos/excluir/{id}")
+    public String excluir(@PathVariable("id")Long id, Model model){
+        System.out.println("excluir");
+    if(!service.departamentoTemCargos(id)){
+        service.excluir(id);
+    }
+    return listar(model);
     }
 }
