@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 /*
  * A anotação @Service indica ao Spring que essa é uma classe de Serviço. A anotação Transactional indica ao Spring quais métodos ou classes
  * precisam de uma transação no banco de dados. Ex: Os métodos de insert,update e delete precisam de uma transação pra caso algo dê errado ter como voltar
  * */
 @Transactional(readOnly = true) @Service
-public class FuncionarioImpl implements  FuncionarioService{
+public class FuncionarioServiceImpl implements  FuncionarioService{
     
     @Autowired
     private FuncionarioDao dao;
@@ -40,5 +42,27 @@ public class FuncionarioImpl implements  FuncionarioService{
     @Override
     public List<Funcionario> buscarTodos() {
         return dao.findAll();
+    }
+
+    @Override
+    public List<Funcionario> buscarPorNome(String nome) {
+        return dao.findByNome(nome);
+    }
+
+    @Override
+    public List<Funcionario> buscarPorCargo(Long id) {
+        return dao.findByCargoId(id);
+    }
+
+    @Override
+    public List<Funcionario> buscarPorDatas(LocalDate entrada, LocalDate saida) {
+        if(entrada != null && saida != null){
+            return dao.findByDataEntradaSaida(entrada, saida);
+        } else if(entrada != null){
+            return dao.findByDataEntrada(entrada);
+        } else if (saida != null) {
+            return dao.findByDataSaida(saida);
+        }
+        return new ArrayList<>();
     }
 }
