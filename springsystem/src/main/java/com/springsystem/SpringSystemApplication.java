@@ -10,7 +10,7 @@ public class SpringSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSystemApplication.class, args);
-                   System.out.println("Spring app up and ready");
+                   System.out.println("Spring app up and ready!");
 	}
 
 }
