@@ -4,11 +4,13 @@ import com.springsystem.domain.Funcionario;
 import com.springsystem.domain.UF;
 import com.springsystem.service.CargoService;
 import com.springsystem.service.FuncionarioService;
+import com.springsystem.web.validator.FuncionarioValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,6 +26,11 @@ public class FuncionarioController {
     FuncionarioService funcionarioService;
     @Autowired
     CargoService cargoService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.addValidators(new FuncionarioValidator());
+    }
 
     @GetMapping("/cadastrar")
     public String cadastrar(Funcionario funcionario){

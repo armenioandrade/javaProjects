@@ -6,17 +6,17 @@ import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "FUNCIONARIOS")
 public class Funcionario extends AbstractEntity<Long>{
-    @NotBlank(message = "Insira um nome.")
+
+    @NotBlank(message = "Insira um nome")
     @Column(nullable = false, unique = true)
+    @Size(min = 3, max = 60, message = "O nome deve ter entre {min} e {max} caracteres")
     private String nome;
 
     @NotNull
